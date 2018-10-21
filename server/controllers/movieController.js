@@ -4,7 +4,7 @@ const apiHelpers = require('../helpers/apiHelpers.js');
 //Return requests to the client
 module.exports = {
   getSearch: (req, res) => {    
-    console.log('req.query for search method is ', req.query);
+    // console.log('req.query for search method is ', req.query);
     let genreId = req.query.genre;
 
     // sort by horrible votes -- can also sort by popularity.asc
@@ -24,7 +24,7 @@ module.exports = {
   saveMovie: (req, res) => {
     movieModel.addToDB(req.body)
     .then((docs) => {
-      console.log('docs from saveMovie is', docs);
+      // console.log('docs from saveMovie is', docs);
       res.send(docs);
     })
     .catch((err) => {
@@ -33,10 +33,10 @@ module.exports = {
   },
 
   deleteMovie: (req, res) => {
-    console.log('req.body of deletemovie is', req.body)
+    // console.log('req.body of deletemovie is', req.body)
     movieModel.deleteFromDB(req.body.movie).exec()
     .then((docs) => {
-      console.log('docs from deleteMovie is', docs);
+      // console.log('docs from deleteMovie is', docs);
       res.send(docs);
     })
     .catch((err) => {

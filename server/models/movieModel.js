@@ -29,21 +29,10 @@ let addToDB = (movieFromClient) => {
     newMovie,
     {upsert: true}
   ).exec()
-
-  // newMovie.save((err) => {
-  //   console.error(err);
-  // });
-
-  // ANOTHER WAY...
-  // Movie.create(movieFromClient, (err, movie) => {
-  //   if (err) {
-  //     console.error(err)
-  //   }
-  // })
 }
 
 let deleteFromDB = (movieFromClient) => {
-  console.log('movieFromClient is', movieFromClient)
+  // console.log('movieFromClient is', movieFromClient)
   return Movie.findOneAndDelete({id: movieFromClient.id}, (err) => {
     if (err) {
       console.error(err);

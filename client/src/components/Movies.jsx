@@ -8,7 +8,7 @@ class Movies extends React.Component {
 
 
   handleClick(movie) {
-    console.log('movie clicked is', movie)
+    // console.log('movie clicked is', movie)
 
     if (this.props.showFaves === false) {
       this.props.saveMovie(movie)

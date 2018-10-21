@@ -21,18 +21,15 @@ class App extends React.Component {
   }
 
   getMovies(genre) {
-    // make an axios request to your server on the GET SEARCH endpoint
     let options = {
       method: 'get',
       url: '/movies/search',
       params: {genre}
     }
-    console.log('in index.jsx, the genre is', genre)
     axios(options)
     .then(
       (searchResults) => {
         let movieList = searchResults.data.results;
-        console.log('movieList received by client is:', movieList)
         this.setState({
           movies: movieList
         })
@@ -43,7 +40,6 @@ class App extends React.Component {
   getFavorites() {
     axios.get('/movies/favorites')
     .then(({data}) => {
-      console.log('result of getFavorites request:', data)
       this.setState({
         favorites: data
       })
@@ -54,7 +50,6 @@ class App extends React.Component {
   }
 
   saveMovie(movie) {
-    console.log('I will save:', movie);
     axios.post('/movies/save', movie)
     .then((response) => console.log(response))
     .then(this.getFavorites())
@@ -62,9 +57,8 @@ class App extends React.Component {
   }
 
   deleteMovie(movie) {
-    // same as above but do something diff
-    console.log('I will delete:', movie)
     axios.delete('/movies/delete', {data: {movie}})
+    // a note on delete request's data: https://github.com/axios/axios/issues/897#issuecomment-343715381
     .then((response) => console.log(response))
     .then(this.getFavorites())
     .catch((err) => console.error(err))
