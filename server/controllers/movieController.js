@@ -4,13 +4,11 @@ const apiHelpers = require('../helpers/apiHelpers.js');
 //Return requests to the client
 module.exports = {
   getSearch: (req, res) => {    
-    // get the search genre
-    let genreIds = [12, 14];
-    // TO DO: let genreIds = req.body.genreIds .......
+    console.log('req.query for search method is ', req.query);
+    let genreId = req.query.genre;
 
-    let genresString = genreIds.join(',');
     // sort by horrible votes -- can also sort by popularity.asc
-    let queryString = `sort_by=vote_average.asc&with_genres=${genresString}`
+    let queryString = `sort_by=popularity.asc&with_genres=${genreId}`
 
     // endpoint for searching movies by genres https://api.themoviedb.org/3/discover/movie
     apiHelpers.getRequest('discover/movie', queryString)
@@ -27,7 +25,8 @@ module.exports = {
   },
 
   saveMovie: (req, res) => {
-
+    // req.body holds an object of the movie. Push to database.
+    res.send('hello world');
   },
 
   deleteMovie: (req, res) => {
