@@ -41,10 +41,11 @@ class App extends React.Component {
   }
 
   getFavorites() {
-    axios.get('/movies/save')
-    .then((movies) => {
+    axios.get('/movies/favorites')
+    .then(({data}) => {
+      console.log('result of getFavorites request:', data)
       this.setState({
-        favorites: movies
+        favorites: data
       })
     })
     .catch((err) => {
@@ -63,7 +64,7 @@ class App extends React.Component {
   deleteMovie(movie) {
     // same as above but do something diff
     console.log('I will delete:', movie)
-    axios.delete('/movies/delete', movie)
+    axios.delete('/movies/delete', {data: {movie}})
     .then((response) => console.log(response))
     .then(this.getFavorites())
     .catch((err) => console.error(err))

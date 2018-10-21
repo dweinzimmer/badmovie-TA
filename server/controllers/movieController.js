@@ -33,7 +33,8 @@ module.exports = {
   },
 
   deleteMovie: (req, res) => {
-    movieModel.deleteFromDB(req.body)
+    console.log('req.body of deletemovie is', req.body)
+    movieModel.deleteFromDB(req.body.movie).exec()
     .then((docs) => {
       console.log('docs from deleteMovie is', docs);
       res.send(docs);

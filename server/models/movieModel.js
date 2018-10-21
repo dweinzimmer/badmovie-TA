@@ -43,6 +43,7 @@ let addToDB = (movieFromClient) => {
 }
 
 let deleteFromDB = (movieFromClient) => {
+  console.log('movieFromClient is', movieFromClient)
   return Movie.findOneAndDelete({id: movieFromClient.id}, (err) => {
     if (err) {
       console.error(err);
