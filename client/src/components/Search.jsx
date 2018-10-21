@@ -39,10 +39,10 @@ class Search extends React.Component {
         <button onClick={() => {this.props.swapFavorites()}}>{this.props.showFaves ? "Show Results" : "Show Favorites"}</button>
         <br/><br/>
         <select onChange={this.handleGenreChange}>
-          <option value="none">Choose a genre</option>
+          <option key="none" value="none">Choose a genre</option>
           {this.state.genres.map((genre) => {
             return (
-              <option value={genre.id}>{genre.name}</option>
+              <option key={genre.id} value={genre.id}>{genre.name}</option>
             )
           })}
         </select>
