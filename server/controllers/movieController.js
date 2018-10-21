@@ -8,7 +8,7 @@ module.exports = {
     let genreId = req.query.genre;
 
     // sort by horrible votes -- can also sort by popularity.asc
-    let queryString = `sort_by=popularity.asc&with_genres=${genreId}`
+    let queryString = `sort_by=popularity.desc&with_genres=${genreId}`
 
     // endpoint for searching movies by genres https://api.themoviedb.org/3/discover/movie
     apiHelpers.getRequest('discover/movie', queryString)

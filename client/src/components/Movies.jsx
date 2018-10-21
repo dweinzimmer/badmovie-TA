@@ -36,7 +36,7 @@ class Movies extends React.Component {
                   </div>
                   <div className="movie_rating">
                     <span className="title">Rating</span>
-                    <span>{movie.popularity * 10}</span>
+                    <span>{movie.popularity}</span>
                   </div>
                 </section>
               </div>
