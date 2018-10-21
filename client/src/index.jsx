@@ -40,10 +40,23 @@ class App extends React.Component {
     )
   }
 
+  getFavorites() {
+    axios.get('/movies/save')
+    .then((movies) => {
+      this.setState({
+        favorites: movies
+      })
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
+
   saveMovie(movie) {
     console.log('I will save:', movie);
     axios.post('/movies/save', movie)
     .then((response) => console.log(response))
+    .then(this.getFavorites())
     .catch((err) => console.error(err))
   }
 
@@ -52,14 +65,19 @@ class App extends React.Component {
     console.log('I will delete:', movie)
     axios.delete('/movies/delete', movie)
     .then((response) => console.log(response))
+    .then(this.getFavorites())
     .catch((err) => console.error(err))
   }
 
   swapFavorites() {
-  //dont touch
+  // don't touch
     this.setState({
       showFaves: !this.state.showFaves
     });
+  }
+
+  componentDidMount() {
+    this.getFavorites();
   }
 
   render () {

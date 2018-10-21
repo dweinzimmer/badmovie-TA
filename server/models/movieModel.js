@@ -3,6 +3,7 @@
 // const sqlDb = require('../../db/sql');
 //For Mongo
 const db = require('../../db/mongodb')
+const mongoose = require('mongoose');
 
 var movieSchema = new mongoose.Schema({
   title: String,
@@ -22,9 +23,16 @@ const Movie = mongoose.model('Movie', movieSchema);
 
 let addToDB = (movieFromClient) => {
   let newMovie = new Movie(movieFromClient);
-  newMovie.save((err) => {
-    console.error(err);
-  });
+
+  return Movie.findOneAndUpdate(
+    {id: movieFromClient.id},
+    newMovie,
+    {upsert: true}
+  ).exec()
+
+  // newMovie.save((err) => {
+  //   console.error(err);
+  // });
 
   // ANOTHER WAY...
   // Movie.create(movieFromClient, (err, movie) => {
@@ -35,7 +43,7 @@ let addToDB = (movieFromClient) => {
 }
 
 let deleteFromDB = (movieFromClient) => {
-  Movie.findOneAndDelete({id: movieFromClient.id}, (err) => {
+  return Movie.findOneAndDelete({id: movieFromClient.id}, (err) => {
     if (err) {
       console.error(err);
     }
@@ -43,7 +51,7 @@ let deleteFromDB = (movieFromClient) => {
 }
 
 let getFromDB = () => {
-  Movie.find({}, (err, docs) => {
+  return Movie.find({}, (err, docs) => {
     if (err) {
       console.error(err);
     } else {
