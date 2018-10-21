@@ -1,5 +1,6 @@
-# API Key
+# API Key & bundle
 config.js 
+client/dist/bundle.js
 
 # Logs
 logs

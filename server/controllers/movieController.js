@@ -8,16 +8,15 @@ module.exports = {
     let genreIds = [12, 14];
     // TO DO: let genreIds = req.body.genreIds .......
 
-    // use this endpoint to search for movies by genres https://api.themoviedb.org/3/discover/movie
-    
     let genresString = genreIds.join(',');
-    let queryString = `sort_by=popularity.asc&with_genres=${genresString}`
+    // sort by horrible votes -- can also sort by popularity.asc
+    let queryString = `sort_by=vote_average.asc&with_genres=${genresString}`
 
+    // endpoint for searching movies by genres https://api.themoviedb.org/3/discover/movie
     apiHelpers.getRequest('discover/movie', queryString)
     .then((data) => res.send(data));
-
-    // and sort them by horrible votes using the search parameters in the API
   },
+
   getGenres: (req, res) => {
     // make an axios request to get the list of official genres, with this endpoint https://api.themoviedb.org/3/genre/movie/list
 
@@ -26,9 +25,11 @@ module.exports = {
     
     // send back
   },
+
   saveMovie: (req, res) => {
 
   },
+
   deleteMovie: (req, res) => {
 
   }
